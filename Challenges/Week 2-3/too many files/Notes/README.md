@@ -25,7 +25,19 @@ Unzipping yields a lot of `data` files, except for:
 
 ### 035 ASCII text
 
+#### Testing for base64
 
+Using ripgrep to pattern match for base64 files results in the following:
+
+```bash
+rg '^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$'
+```
+
+![Base64 test result](./assets/base64_test.png)
+
+This indicates that `035` may be base64-decodable.
+
+#### Decrypting by base64
 The file `035` contains the following content:
 
 ```
