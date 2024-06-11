@@ -23,6 +23,21 @@ Unzipping yields a lot of `data` files, except for:
 - `143: OpenPGP Public Key`
 - `190: OpenPGP Secret Key`
 
+### 035 ASCII text
+
+
+The file `035` contains the following content:
+
+```
+Q09NUDY0NDV7bHNfZ3JlcF9maWxlX3doYXRfZGlkX3lvdV91c2U/fQo=
+```
+
+Decrypting it via `base64 -d 035` yields:
+
+```
+COMP6445{ls_grep_file_what_did_you_use?}
+```
+
 ### OpenPGP keys
 
 
