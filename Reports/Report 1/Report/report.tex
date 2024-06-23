@@ -8,6 +8,7 @@
 %% Sets page size and margins
 \usepackage[a4paper,top=2cm,bottom=2cm,left=2.5cm,right=2.5cm,marginparwidth=1.75cm]{geometry}
 \usepackage{enumitem}
+\usepackage{environ}
 
 %% Useful packages
 \usepackage{amsmath}
@@ -18,6 +19,12 @@
 \usepackage[colorlinks=true,allcolors=.,urlcolor=blue]{hyperref} % allowing hyperlinking of references. You can set the colour of the links or turn the colorlinks to false if no colour preferable. 
 \usepackage[numbers]{natbib} % for Vancouver numbering style citation. Remove the [numbers] command for author-year Harvard style referencing. 
 
+%% For numbered lists to follow heading numbering
+\NewEnviron{myenum}{
+    \begin{enumerate}[label=\thesubsection.\arabic*]
+        \BODY
+    \end{enumerate}
+}
 
 %% optional changes to the style. Comment (Ctrl+/) to remove these options. 
 % change font to sans-serif fonts. 
