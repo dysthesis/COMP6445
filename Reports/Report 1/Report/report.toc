@@ -7,3 +7,4 @@
 \contentsline {subsection}{\numberline {1.5}Disclaimer}{2}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}Assumptions}{2}{subsection.1.6}%
 \contentsline {subsection}{\numberline {1.7}Structure of this report}{2}{subsection.1.7}%
+\contentsline {section}{\numberline {2}Question 1: Reason for destruction}{2}{section.2}%
