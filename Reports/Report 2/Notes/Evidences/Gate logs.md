@@ -6,13 +6,13 @@ Using [NuShell](https://github.com/nushell/nushell) to filter the logs to show o
 
 The exit time of Alyx Hamilton (16:58) corroborates David Caelus' account that her laptop did not leave the Caelus Engineering's network until after 5pm:
 
-> To : info@jimsforensics.com
+> **To:** info@jimsforensics.com
 >
-> From : david.caelus@caelusengineering.com.au
+> **From:** david.caelus@caelusengineering.com.au
 >
-> Date: 24 October 2021
+> **Date:** 24 October 2021
 >
-> Subject: Fw: Re: Assistance request
+> **Subject:** Fw: Re: Assistance request
 >
 > ...
 > I have spoken to our IT person Sam and she was able to pull some more data for us - I have the work emails of Alyx, and Michael; and I have the internet traffic from that machine from the afternoon in question. Seems like the device didn't leave our network until after 5pm.
