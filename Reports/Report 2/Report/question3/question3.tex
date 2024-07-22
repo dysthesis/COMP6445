@@ -1,10 +1,45 @@
-\section{Question 3: Further evidence} % (fold)
-\label{sub:question_further_evidence}
+\section{Question 3: Encryption} % (fold)
+\label{sec:Question 3: Encryption}
+
+\subsection{Introduction} % (fold)
+\label{sub:Introduction}
 
 \begin{myenum}
-	\item Event log with records of file transfers to external drive with the laptop.
-	\item Information on the entity associated with the email address \code{johndavis5891@gmail.com}.
-	\item Information regarding the standard activity at Caelus Engineering, which would assist in identifying 'out of place' observations.
+	\item The NIST\footnote{NIST, "encrypt," in Glossary | CSRC. [Online]. Available: https://csrc.nist.gov/glossary/term/encrypt. [Accessed: 22-Jul-2024].} defines "encrypt" as to "cryptographically transform data to produce cipher text".
+		\begin{enumerate}
+			\item The NIST\footnote{NIST, "cryptography," in Glossary | CSRC. [Online]. Available: https://csrc.nist.gov/glossary/term/cryptography. [Accessed: 22-Jul-2024]} further defines "cryptography" as "the discipline that embodies the principles, means, and methods for the transformation of data in order to hide their semantic content, prevent their unauthorized use, or prevent their undetected modification".
+			\item The NIST\footnote{NIST, "cipher text," in Glossary | CSRC. [Online]. Available: https://csrc.nist.gov/glossary/term/cipher\_text. [Accessed: 22-Jul-2024]} further defines "cipher text" as "data in its encrypted form".
+		\end{enumerate}
+	\item Encryption can therefore be defined as the transformation of data in order to ensure its secrecy and integrity.
+	\item Encryption is a virtually ubiquitous feature of modern computing technology, as its nature of providing secrecy has a wealth of uses, whether benign (such as protecting one's financial information when performing a transaction online) or malicious (such as obscuring evidence of illegal activities).
+\end{myenum}
+% subsection Introduction (end)
+
+\subsection{Network encryption} % (fold)
+\label{sub:Network encryption}
+
+\begin{myenum}
+	\item A pcap, or \emph{packet capture} file, is a file which stores network packet data. Such a file is typically procured by capturing the packets which passes through a device (note that this does not necessarily mean that every packet captured involves said device). Such a file logs all network communication that said device "hears".
+		\begin{enumerate}
+			\item A "packet" is a small segment of a larger message, which are sent through computer networks, and are recombined by the recipient to obtain the whole message.\footnote{Cloudflare, "What is a Packet?" Cloudflare. Available: https://web.archive.org/web/20240622023826/https://www.cloudflare.com/learning/network-layer/what-is-a-packet/. [Accessed: 22-Jul-2024].}
+		\end{enumerate}
+	\item JF is provided the pcap file procured from Alyx Hamilton's laptop by CE. 
+	\item A cryptographic hash (using the MD5 algorithm) is provided alongside the pcap file. The calculated hash of the pcap file appears to match the provided hash, as can be seen in Figure~\ref{pcap_verification}. Assuming that the integrity of the file containing the provided hash is maintained, this means that the pcap file has not been tampered with throughout the span of time between the calculation of the provided hash and the time of verification.
+	\item Secure Sockets Layer (SSL), as well as its successor, Transport Layer Security (TLS), are protocols for encrypting, securing, and authenticating communications that take place on the internet.\footnote{Cloudflare, "How does SSL work?" Cloudflare. [Online]. Available: https://www.cloudflare.com/learning/ssl/how-does-ssl-work/. [Accessed: 22-Jul-2024].} It is used to ensure the secrecy and authenticity of communication over the internet.
+	\item Because the pcap file contains packets encrypted using SSL, a log of the SSL keys necessary to decrypt them is also provided to JF by CE. A cryptographic hash of the log is also provided, and the calculated hash of the log file appears to match that of the provided hash, as can be seen in Figure~\ref{ssl_key_log_verification}. Similar to the pcap file, this means that the pcap file has not been tampered with throughout the span of time between the calculation of the provided hash and the time of verification, assuming that the integrity of the file containing the provided hash is maintained.
+	\item Wireshark is a network traffic analyser.\footnote{Wireshark Foundation, "Wireshark," GitLab. [Online]. Available: https://gitlab.com/wireshark/wireshark. [Accessed: 22-Jul-2024].} It is a tool that can be used to capture packets from the host device's network interface, creating a pcap file, and analysing pcap files.
+		\begin{enumerate}
+			\item The pcap file can be accessed in Wireshark by clicking \texttt{File > Open}  on the top menu bar, and then selecting the file from the resulting file explorer dialog.
+			\item After opening the pcap file, the SSL key log can be imported by selecting \texttt{Edit > Preferences} on the top menu bar, selecting \texttt{Protocols > TLS} on the preferences menu, and then clicking the the \texttt{Browse} button underneath \texttt{(Pre)-Master-Secret log filename} and selecting the SSL key log file, as can be seen in Figure~\ref{importing_ssl_key_log}.
+		\end{enumerate}
+	\item Quick UDP Internet Connections (QUIC) is an encrypted-by-default transport protocol originally developed by Google\footnote{A. Ghedini, "The Road to QUIC," Cloudflare Blog. [Online]. Available: https://blog.cloudflare.com/the-road-to-quic. [Accessed: 22-Jul-2024].} that is supported by the Google Chrome web browser, beginning small-scale deployments of the original implementation, gQUIC in 2013, and eventually default-enabling its successor, IETF QUIC in 2021 with Chrome 93.\footnote{Chromium Project, "QUIC, a multiplexed transport over UDP," Chromium. [Online]. Available: https://www.chromium.org/quic/. [Accessed: 22-Jul-2024].}
+	\item I note that the version of Google Chrome running on Alyx Hamilton's laptop is 84. Two points of observation can be drawn from this:
+		\begin{enumerate}
+			\item It does not appear to be possible to decrypt the QUIC packets sent to and from Google Chrome in the provided pcap file, because the export of QUIC secrets is only available on version 89 onwards of Google Chrome.\footnote{Wireshark Foundation, "The TLS/QUIC sessions can't be decrypted," GitLab. [Online]. Available: https://gitlab.com/wireshark/wireshark/-/issues/17111. [Accessed: 22-Jul-2024].}
+			\item It appears that the use of QUIC is manually enabled on the Google Chrome browser running on Alyx Hamilton's laptop, as the protocol is only enabled by default from version 93 onwards of Google Chrome.
+		\end{enumerate}
 \end{myenum}
 
-% subsection Question 3: Further evidence (end)
+% subsection Network encryption (end)
+
+% section Question 3: Encryption (end)
