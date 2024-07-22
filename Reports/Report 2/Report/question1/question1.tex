@@ -1,0 +1,102 @@
+\section{Question 1: Reason for destruction} % (fold)
+\label{sec:question_reason_for_destruction}
+\subsection{Procurement and extraction of evidence} % (fold)
+\label{sub:procurement_and_extraction_of_evidence}
+
+\subsection{Extraction of evidence} % (fold)
+\label{sub:extraction_of_evidence}
+
+% subsection Extraction of evidence (end)
+\begin{myenum}
+    \item This section describes the method with which the evidence laid out in the rest of this report is procured.
+    \item A disk image is a digital replica of the contents of a physical drive, including any unallocated space.
+    \item I note that there are no additional cryptographic hashes provided with the disk image, nor is the disk image formatted in a forensically admissible format (such as E01).
+    \item I extracted the information presented from this point onwards from the provided disk image using the Autopsy forensics toolkit.
+\end{myenum}
+
+% subsection Procurement and extraction of evidence (end)
+
+\subsection{Email} % (fold)
+\label{sub:email}
+
+\begin{myenum}
+\item \label{item:email} I note the existence of an email from \code{alyx.hamilton@caelusengineering.com.au} sent to the address \code{johndavis5891@gmail.com} at 2020-09-04 16:27:18 AEST with the subject: \emph{"It's done"}. Some notable details include:
+    \begin{enumerate}
+        \item The body of the email contains only the following line: \emph{"The files are copying over as we speak. What should I do now? Where do I meet you?"}.
+        \item The email is found on the \code{\textbackslash\textbackslash Root - Mailbox\textbackslash IPM\_SUBTREE\textbackslash [Gmail]\textbackslash Bin}.
+        \item This email is the only correspondence found between Alyx Hamilton and \code{johndavis5891@gmail.com}.
+        \item This email is the last email found on the disk image of Alyx Hamilton's laptop
+    \end{enumerate}
+\end{myenum}
+
+% subsection Email (end)
+
+
+\subsection{Accessing Google Drive} % (fold)
+\label{sub:accessing_google_drive}
+
+\begin{table}
+    \caption{Google Drive URLs accessed}\label{tab:google_drive}
+    \begin{center}
+        \begin{tabular}[c]{|l|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{\textbf{Date accessed}} & 
+            \multicolumn{1}{c|}{\textbf{Title}} &
+            \multicolumn{1}{c|}{\textbf{URL}} \\
+            \hline
+            2020-09-04 14:31:21 AEST & PROJECTS 19:20 - Google Drive & \url{https://drive.google.com/drive/folders/1S7ETsRhUs6hCzgH6o-75pLisyJL1ftPL} \\
+            2020-09-04 14:27:57 AEST & Shared Drive - Google Drive & \url{https://drive.google.com/drive/folders/1sinCWRITQJTCD0WmsvRfwGIDsC4HlMvA} \\
+            2020-09-04 14:27:55 AEST & Shared with me - Google Drive & \url{https://drive.google.com/drive/shared-with-me} \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+\begin{myenum}
+     \item Some of the most web history on the device displays the rapid access of various pages in the Google Suite. These are briefly listed in Table~\ref{tab:google_drive}
+\end{myenum}
+
+% subsection Accessing Google Drive (end)
+
+\subsection{Attached USB drives} % (fold)
+\label{sub:attached_usb_drives}
+\begin{myenum}
+    \item Table~\ref{tab:usb-drives} details the make, model, and ID of two external USB drives that are recorded to have been connected to this device, as well as the time they were attached.
+\end{myenum}
+
+\begin{table}
+    \caption{List of attached external USB drives}\label{tab:usb-drives}
+    \begin{center}
+        \begin{tabular}[c]{|l|l|l|l|l|}
+            \hline
+
+            \multicolumn{1}{|c}{\textbf{No.}} & 
+            \multicolumn{1}{|c}{\textbf{Device make}} & 
+            \multicolumn{1}{|c}{\textbf{Device model}} & 
+            \multicolumn{1}{|c}{\textbf{Device ID}} & 
+            \multicolumn{1}{|c|}{\textbf{Date/Time}} \\
+
+            \hline
+
+            1 & SanDisk Corp. & Cruzer Blade & 4C530300831216101192 & 2020-09-04 10:11:55 AEST \\
+            2 & SanDisk Corp. & Product: 55A5 & 4C530000050910115114 & 2020-09-04 15:50:09 AEST \\
+
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+% subsection Attached USB drives (end)
+
+\subsection{Discussion} % (fold)
+\label{sub:discussion}
+
+The email found on 2.2.1 appears to be suspicious from multiple aspects. The most noticeable among which is its cryptic language. Furthermore, the recipient is not an address within Caelus Engineering, nor is it one which otherwise appears in other emails in Alyx Hamilton's mailbox. Lastly, the email is found in the \code{Bin} directory, which indicates attempts at hiding it.
+
+The web activity discussed in 2.3.1 were also found to be within temporal proximity of the email discussed above. They directly precede the web history entry belonging to said email. The site accessed, belonging to "Google Drive" and "Google Docs", are benign, but may be used as a method of exfiltrating data.
+
+Likewise, the external USB devices that are noted to have been connected to the device in 2.4.1 are occurences that are otherwise benign, but may be used as a method of exfiltrating data.
+
+% subsection Discussion (end)
+
+% section Question 1: Reason for destruction (end)
