@@ -11,4 +11,4 @@ TZ="Australia/Adelaide" tshark -r hamiltona_network_log.pcapng -T fields -e fram
 
 which yields:
 
-![Time span of the packet capture](.../../Screenshots/pcap_timespan.png)
+![Time span of packet capture](../../Screenshots/pcap_timespan.png)
