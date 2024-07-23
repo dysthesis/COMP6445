@@ -1,25 +1,34 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Background}{1}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}My instructions}{1}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.2}My instructions}{2}{subsection.1.2}%
 \contentsline {subsection}{\numberline {1.3}Provided materials}{2}{subsection.1.3}%
 \contentsline {subsection}{\numberline {1.4}Qualifications}{2}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Information relied upon}{2}{subsection.1.5}%
-\contentsline {subsection}{\numberline {1.6}Disclaimer}{2}{subsection.1.6}%
-\contentsline {subsection}{\numberline {1.7}Assumptions}{2}{subsection.1.7}%
+\contentsline {subsection}{\numberline {1.6}Disclaimer}{3}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}Assumptions}{3}{subsection.1.7}%
 \contentsline {subsection}{\numberline {1.8}Structure of this report}{3}{subsection.1.8}%
 \contentsline {subsection}{\numberline {1.9}Code of conduct}{3}{subsection.1.9}%
 \contentsline {section}{\numberline {2}Question 1: Reason for destruction}{3}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Procurement and extraction of evidence}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Extraction of evidence}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Email}{3}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Accessing Google Drive}{3}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Attached USB drives}{3}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.3}Email}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Accessing Google Drive}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Attached USB drives}{4}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}Discussion}{4}{subsection.2.6}%
 \contentsline {section}{\numberline {3}Question 2: Covering tracks}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Deleted email}{4}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Deleted project archives}{4}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Question 3: Encryption}{4}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Introduction}{4}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Network encryption}{5}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Appendix}{6}{section.5}%
+\contentsline {subsection}{\numberline {3.2}Deleted project archives}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Question 3: Encryption}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Introduction}{5}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Procurement and extraction of evidence}{5}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Network encryption}{6}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Analysis and discussion}{7}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Conclusion}{7}{subsection.4.5}%
+\contentsline {paragraph}{Network encryption}{7}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Appendix}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Figures}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Dockerfile for Volatility 3 Environment}{12}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Dockerfile}{12}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}zshrc}{13}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Instructions for use}{14}{subsubsection.5.2.3}%

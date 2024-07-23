@@ -15,10 +15,10 @@
 \end{myenum}
 % subsection Introduction (end)
 
-\subsection{Network encryption} % (fold)
-\label{sub:Network encryption}
-
+\subsection{Procurement and extraction of evidence} % (fold)
+\label{sub:Procurement and extraction of evidence}
 \begin{myenum}
+	\item This section describes the methodology with which the evidence laid out in the rest of this report is procured.
 	\item A pcap, or \emph{packet capture} file, is a file which stores network packet data. Such a file is typically procured by capturing the packets which passes through a device (note that this does not necessarily mean that every packet captured involves said device). Such a file logs all network communication that said device "hears".
 		\begin{enumerate}
 			\item A "packet" is a small segment of a larger message, which are sent through computer networks, and are recombined by the recipient to obtain the whole message.\footnote{Cloudflare, "What is a Packet?" Cloudflare. Available: https://web.archive.org/web/20240622023826/https://www.cloudflare.com/learning/network-layer/what-is-a-packet/. [Accessed: 22-Jul-2024].}
@@ -32,8 +32,25 @@
 			\item The pcap file can be accessed in Wireshark by clicking \texttt{File > Open}  on the top menu bar, and then selecting the file from the resulting file explorer dialog.
 			\item After opening the pcap file, the SSL key log can be imported by selecting \texttt{Edit > Preferences} on the top menu bar, selecting \texttt{Protocols > TLS} on the preferences menu, and then clicking the the \texttt{Browse} button underneath \texttt{(Pre)-Master-Secret log filename} and selecting the SSL key log file, as can be seen in Figure~\ref{importing_ssl_key_log}.
 		\end{enumerate}
+	\item Volatile memory is a type of computer memory which loses its content when power is turned off or lost.\footnote{NIST, "Volatile Memory," in Glossary | CSRC. [Online]. Available: https://csrc.nist.gov/glossary/term/volatile\_memory. [Accessed: 22-Jul-2024].} 
+	\item While not the only type of volatile memory, Random Access Memory (RAM), which is also commonly referred to as \emph{memory}, is the most widely recognised type of volatile memory. Other types of volatile memory, such as CPU registers and caches exist, but are typically very small in size (with sizes measured in bits\footnote{E. Edwards, "Memory," Imperial College London. [Online]. Available: https://www.doc.ic.ac.uk/~eedwards/compsys/memory/index.html. [Accessed: 22-Jul-2024].} and kilobytes\footnote{K. Huck, "Cache Lines and Cache Size," National Institute of Computer Science. [Online]. Available: https://www.nic.uoregon.edu/~khuck/ts/acumem-report/manual\_html/ch03s02.html. [Accessed: 22-Jul-2024].}).
+	\item Volatility is a framework for extracting digital artifacts from samples of volatile memory, or more precisely, RAM.\footnote{Volatility Foundation, "Volatility 3," GitHub. [Online]. Available: https://github.com/volatilityfoundation/volatility3. [Accessed: 22-Jul-2024].} Specifically, I have used version 3 of Volatility.
+	\item Volatility can be obtained via the \texttt{pip} package manager for Python. For the sake of reproducibility and convenience, a copy of the Dockerfile I have used to set up my working environment for Volatility 3, alongside instructions on how to use it, is provided in Section~\ref{sec:Dockerfile for Volatility 3 Environment}
+	\item After Volatility 3 is procured, the provided memory image can then be accessed using Volatility 3 by passing it as a command-line argument, like so: \texttt{vol.py -f Windows-7-x64-Pro-Snapshot7.7z [plugin name]}, where \texttt{Windows-7-x64-Pro-Snapshot7.vmem} is the path to the memory dump. This path assumes that the memory dump file resides in the current working directory; it may need to be adjusted otherwise.
+	\begin{enumerate}
+		\item Volatility 3 comes with a set of plugins, which instructs the tool on how to analyse the memory dump and present the resulting information. An introduction on the various plugins available to both Volatility 2 and 3, and how to use them, can be found on \href{https://book.hacktricks.xyz/generic-methodologies-and-resources/basic-forensic-methodology/memory-dump-analysis/volatility-cheatsheet}{HackTricks}.
+	\end{enumerate}
+	\item Docker is a tool which creates and manages \emph{containers}, which are isolated environments containing all the code and dependencies of an application.\footnote{Oracle, "What is Docker?" Oracle. [Online]. Available: https://www.oracle.com/au/cloud/cloud-native/container-registry/what-is-docker/. [Accessed: 22-Jul-2024].} This tool facilitates the creation of standardised, uniform environments across different machines.
+	\item A \emph{Dockerfile} is a file containing instructions pertaining the creation of a container image.\footnote{Docker, "Dockerfile reference," Docker Docs. [Online]. Available: https://docs.docker.com/reference/dockerfile/. [Accessed: 22-Jul-2024].} A Docker image is a standalone executable used to create a container;\footnote{Amazon Web Services, "What’s the Difference Between Docker Images and Containers?" AWS. [Online]. Available: https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/. [Accessed: 22-Jul-2024].} it is effectively a \emph{template} that can be used to instantiate containers.
+\end{myenum}
+% subsection Procurement and extraction of evidence (end)
+
+\subsection{Network encryption} % (fold)
+\label{sub:Network encryption}
+
+\begin{myenum}
 	\item Quick UDP Internet Connections (QUIC) is an encrypted-by-default transport protocol originally developed by Google\footnote{A. Ghedini, "The Road to QUIC," Cloudflare Blog. [Online]. Available: https://blog.cloudflare.com/the-road-to-quic. [Accessed: 22-Jul-2024].} that is supported by the Google Chrome web browser, beginning small-scale deployments of the original implementation, gQUIC in 2013, and eventually default-enabling its successor, IETF QUIC in 2021 with Chrome 93.\footnote{Chromium Project, "QUIC, a multiplexed transport over UDP," Chromium. [Online]. Available: https://www.chromium.org/quic/. [Accessed: 22-Jul-2024].}
-	\item I note that the version of Google Chrome running on Alyx Hamilton's laptop is 84. This can be found by extracting the list of DLLs from Google Chrome processes found on the memory dump using Volatility, as can be seen in Figure~\ref{chrome_version}.
+	\item I note that the version of Google Chrome running on Alyx Hamilton's laptop is 84. This can be found by extracting the list of DLLs from Google Chrome processes found on the memory dump using Volatility, as can be seen in Figure~\ref{chrome_version}. The use of memory analysis here further ascertains that this is the version of Google Chrome that is being actively used on Alyx Hamilton's laptop, rather than one that is only installed.
 	 Two points of observation can be drawn from this:
 		\begin{enumerate}
 			\item It does not appear to be possible to decrypt the QUIC packets sent to and from Google Chrome in the provided pcap file, because the export of QUIC secrets is only available on version 89 onwards of Google Chrome.\footnote{Wireshark Foundation, "The TLS/QUIC sessions can't be decrypted," GitLab. [Online]. Available: https://gitlab.com/wireshark/wireshark/-/issues/17111. [Accessed: 22-Jul-2024].}
@@ -42,5 +59,26 @@
 \end{myenum}
 
 % subsection Network encryption (end)
+\subsection{Analysis and discussion} % (fold)
+\label{sub:Analysis and discussion}
+\begin{myenum}
+	\item There are two methods of network encryption discovered from the provided artefacts: SSL encryption, and QUIC encryption.
+		\begin{enumerate}
+			\item SSL encryption is almost ubiquitously enabled by default on most modern programs. It is unlikely that this is intentionally enabled by some party.
+			\item QUIC encryption is likely enabled with intention by some party, as it is not enabled by default on version 84 of Google Chrome, which is in use on Alyx Hamilton's laptop. Furthermore, the toggle to enable the use of QUIC can only be accessed by entering \texttt{chrome://flags/} in the browser's URL bar and setting \texttt{Experimental QUIC protocol} to \texttt{Enabled}\footnote{M. Geniar, "Enable QUIC protocol in Google Chrome," Mattias Geniar's Blog. [Online]. Available: https://ma.ttias.be/enable-quic-protocol-google-chrome/. [Accessed: 22-Jul-2024].}, rendering the possibility that this feature is enabled by accident (without intent) unlikely.
+		\end{enumerate}
+\end{myenum}
+% subsection Analysis and discussion (end)
+\subsection{Conclusion} % (fold)
+\label{sub:Conclusion}
 
+Indications of encryption were discovered, though not always accompanied by indications of \emph{intent} to encrypt.
+\paragraph{Network encryption} % (fold)
+\label{par:Network encryption}
+
+% paragraph Network encryption (end)
+Using the provided SSL key log, SSL-encrypted packets were able to be decrypted and "made usable". However, QUIC-encrypted packets, which specifically contains communications to and from the Google Chrome browser running on Alyx Hamilton's laptop, were not able to be decrypted due to the technical limitations present in the version of Google Chrome in use.
+
+% paragraph Conclusion (end)
+% subsection Conclusion (end)
 % section Question 3: Encryption (end)
