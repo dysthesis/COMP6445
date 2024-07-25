@@ -1,0 +1,61 @@
+\section{Question 4: Other relevant matters} % (fold)
+\label{sec:Question 4: Other relevant matters}
+
+\subsection{Procurement and extraction of evidence} % (fold)
+\label{sub:Procurement and extraction of evidence}
+\begin{myenum}
+    \item This section describes the methodology with which the evidence laid out in the rest of this report is procured.
+    \item \texttt{mbox} is a family of related file formats, which stores email messages in plain text.\footnote{"mbox," Wikipedia. [Online]. Available: https://en.wikipedia.org/wiki/Mbox. [Accessed: 22-Jul-2024].}
+    \item Thunderbird is a free and open source email client, developed by the Mozilla Foundation.\footnote{"Mozilla Thunderbird," Wikipedia. [Online]. Available: https://en.wikipedia.org/wiki/Mozilla\_Thunderbird. [Accessed: 22-Jul-2024].}
+    \item Thunderbird is able to access and read \texttt{mbox} files. The instructions on how to do so can be found \href{https://documentation.its.umich.edu/mbox-thunderbird}{in this documentation page from the University of Michigan}.
+    \item I note that no cryptographic hash is provided alongside the entry and exit logs from the gates, rendering the integrity of the file unverifiable. Throughout the rest of this report, I will work under the assumption that the integrity of the file is maintained and the data contained in this file is accurate. For reference, the copy of the entry and exit logs from the gates which I possess, under the file name \texttt{CaelusEng\_Gates\_04092020.xlsx}, has a SHA256 sum of \texttt{be8da8b6985d14c03ee964a824886259e398b16f964d26085388db050a16a94f} and an MD5 sum of \texttt{ddaa433b4c866e63b2642391baa99abb}
+    \item I note that no cryptographic hash is provided alongside the mbox files containing records of the email correspondence of Alyx Hamilton and Michael Harris, rendering the integrity of the file unverifiable. Throughout the rest of this report, I will work under the assumption that the integrity of the file is maintained and the data contained in this file is accurate. For reference, the copy of the email correspondence archives for Alyx Hamilton which I possess, under the file name \texttt{Hamilton\_emails.zip}, has a SHA256 sum of \texttt{63c75b2ed12b36b4c5ea7e83f14f884690f7db7aed1b63203ee6d6522b779da9} and an MD5 sum of \texttt{839ab64e92c698265617b03decdfcab9}, and the copy of the email correspondence archives for Michael Harris which I possess, under the file name \texttt{Harris\_emails.zip}, has a SHA256 sum of \texttt{945bb71c03863458c8880b006e92f9fd81b65e91d09841b2787266381d6c36cc} and an MD5 sum of \texttt{a255b1fb156dcbbaf4f32128b5db62eb}.
+    \item \href{https://www.virustotal.com/gui/home/upload}{VirusTotal} is an online service that analyzes suspicious files and URLs to detect types of malware and malicious content using antivirus engines and website scanners.\footnote{Microsoft, "Virus Total - Connectors," Microsoft Learn. [Online]. Available: https://learn.microsoft.com/en-us/connectors/virustotal/. [Accessed: 22-Jul-2024].} The service provides several means of querying its database and checking a file for virus, including uploading the suspected file, entering the suspected IP address or URL, or entering the hash of the suspected file.
+\end{myenum}
+% subsection Procurement and extraction of evidence (end)
+
+\subsection{Potential unauthorised use of Alyx Hamilton's laptop} % (fold)
+\label{sub:Potential unauthorised use of Alyx Hamilton's laptop}
+\begin{myenum}
+    \item The Windows Registry is a database that stores low-level settings for the Microsoft Windows operating system.\footnote{"Windows Registry," Wikipedia. [Online]. Available: https://en.wikipedia.org/wiki/Windows\_Registry. [Accessed: 22-Jul-2024].}
+    \item A \emph{hive} in the Windows Registry is a logical group of keys, subkeys, and values in the registry.\footnote{Microsoft, "Registry Hives," Microsoft Learn. [Online]. Available: https://learn.microsoft.com/en-us/windows/win32/sysinfo/registry-hives. [Accessed: 22-Jul-2024].}
+    \item The Security Account Manager, or SAM, is a registry hive which contains users' password in hashed format.\footnote{Microsoft, "Security Accounts Manager," Microsoft Learn. [Online]. Available: https://learn.microsoft.com/en-us/archive/technet-wiki/11925.security-accounts-manager[Accessed: 22-Jul-2024].}, specifically under the \texttt{V} key of each user.\footnote{Microsoft, "How are NTLM hashes stored under the V key in the SAM?" Microsoft Learn. [Online]. Available: https://learn.microsoft.com/en-us/archive/msdn-technet-forums/6e3c4486-f3a1-4d4e-9f5c-bdacdb245cfd. [Accessed: 22-Jul-2024].}
+    \item \label{no_password} I note the lack of password protection on Alyx Hamilton's user account on her laptop, as indicated by the null \texttt{V} key on her account's subkey in the SAM hive, which should otherwise contain a hash of her password. This renders the account vulnerable to unauthorised use by persons other than Alyx Hamilton, possibly without her knowledge.
+    \item I note a chain of email correspondence between Alyx Hamilton and Sarah Jenskins discussing plans to meet at an unnamed "Thai place" for lunch, as can be seen in Figure~\ref{alyx_sarah_lunch_plan}. The last two messages in the chain indicates that the plan is scheduled at around Friday, September 04, 2020 at 13:43 ACST.
+    \item The provided logs from the entrance gate indicates that Alyx Hamilton left the premises at Friday, September 04, 2020 at 14:05 ACST, and re-entered the premises at 15:20 ACST of the same day, as can be seen in Figure~\ref{hamilton_gate_logs}. The fact that she likely went out for lunch at this time was corroborated by the near identical exit and re-entry times of Sarah Jenskins, with whom she made the plan.
+    \item I note that, based on the provided logs from the gate, everyone but Sarah Jenskins and Alyx Hamilton are present within the premises at one point or another throughout the span of time when the pairleft for lunch.
+    \item \label{pcap_during_lunch} The pcap file indicates that network activity was still present throughout the duration of Alyx Hamilton's and Sarah Jenskins' absence for their lunch plan. This indicates that the device is powered on and active throughout this period of time.
+    \item \label{dns_during_lunch} The majority of the packets found in this time frame were encrypted QUIC packets, rendering their contents unreadable. However, the DNS queries made were not encrypted, and can be read, as can be observed in Figure~\ref{dns_requests_during_alyx_sarah_lunch}.
+    \item \label{gdrive_dns} Notable DNS requests are a number of those querying \texttt{drive.google.com}, for the following reasons:
+        \begin{enumerate}
+            \item The first DNS request for Google Drive present in the provided packet capture file dates to Sep 4, 2020, 13:47:37.583272 ACST, as can be observed in Figure~\ref{first_google_drive_dns_req}, briefly before the departure of Alyx Hamilton from the premises of Caelus Engineering. While not being a smoking gun, there are factors that may render it plausible for Alyx Hamilton to not be within the vicinity of her device during this time, such as the travel time from her initial location to the entrance gates or meeting Sarah Jenskins after her meeting before departing together.
+            \item There are no running programs detected in the memory dump that is known to interact with Google Drive. This means that the request must have come from Google Chrome, which would require a human manually accessing the site. Furthermore, it is my opinion that, based on my prior experience of using this service, access to Google Drive is unlikely to be automatic, given the human-centric nature of the service (\emph{i.e.} its design being intended to be interacted with by a human rather than automated tools); it is highly likely that it is caused by a human. 
+        \end{enumerate}
+    \item \label{alyx_laptop_misuse} It is highly likely, based on the reasons listed throughout points \ref{no_password}, \ref{pcap_during_lunch}, \ref{dns_during_lunch}, and \ref{gdrive_dns} that a human was operating Alyx Hamilton's laptop during her absence for lunch.
+\end{myenum}
+% subsection Potential unauthorised use of Alyx Hamilton's laptop (end)
+
+\subsection{Suspicious email correspondence involving Michael Harris} % (fold)
+\label{sub:Suspicious email correspondence involving Michael Harris}
+\begin{myenum}
+    \item \label{email-michael-to-johndavis} I note the existence of an email correspondence in Michael Harris' email logs involving him and \texttt{johndavis5891@gmail.com}, similar to those previously found on Alyx Hamilton's email logs and disk image in point \ref{item:email}. This can be seen in Figure~\ref{john_davis_emails}.
+        \begin{enumerate}
+            \item The email message sent from Michael Harris to \texttt{johndavis5891@gmail.com}, with the subject "B13 - Done" begins with: "Sorry - reply to this email not the first one." 
+            \item There is no prior correspondence between Michael Harris and \texttt{johndavis5891@gmail.com}.
+            \item There is, however, the email message sent from Alyx Hamilton to \texttt{johndavis5891@gmail.com} that was first discovered in point \ref{item:email}, which was sent 4 minutes prior.
+            \item The email message sent from Alyx Hamilton's address to \texttt{johndavis5891@gmail.com} was sent when she was not present within the premises of Caelus Engineering.
+            \item The addition of point \ref{alyx_laptop_misuse} paints a possibility that the email in \ref{item:email} was sent from Alyx Hamilton's laptop by Michael Harris by mistake.
+        \end{enumerate}
+    \item There appears to be prior correspondence between a LinkedIn user named "John Davis" and Michael Harris, indicating that an attempt at a phone call from the former to the latter may have been made, as can be seen in Figure~\ref{michael_johndavis_linkedin}. 
+    \item John Davis and \texttt{johndavis5891@gmail.com} are likely the same person, given the similarity in name.
+\end{myenum}
+% subsection Suspicious email correspondence involving Michael Harris (end)
+
+\subsection{Possible malware on Alyx Hamilton's laptop} % (fold)
+\label{sub:Possible malware on Alyx Hamilton's laptop}
+
+\begin{myenum}
+    \item Using Volatility to extract the Spotify executable and calculating its hash (Figure~\ref{obtaining_spotify_exe_hash}) and then querying it through VirusTotal (Figure~\ref{virustotal_spotify}), it can be observed that one of the vendors, namely Trapmine, marks the file as suspicious. While this is not a concrete indication of malware, it is noteworthy given how most benign files are not flagged by even a single vendor.
+\end{myenum}
+% subsection Possible malware on Alyx Hamilton's laptop (end)
+% section Question 4: Other relevant matters (end)
